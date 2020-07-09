@@ -1,6 +1,6 @@
 .header {
     height: 10.5rem;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+    box-shadow: 0 2px 4px 0 #0000001a;
 
     .wrap {
         position: relative;
@@ -22,6 +22,16 @@
                 width: 100%;
                 margin: 0;
             }
+        }
+        
+        h1 {
+            position: relative;
+            top: 45%;
+            left: 100px;
+            transform: translateY(-30%);
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
         }
     }
 }

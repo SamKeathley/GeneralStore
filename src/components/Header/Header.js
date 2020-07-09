@@ -10,6 +10,7 @@ function Header(props) {
                 <div className="logo">
                     <img src={Logo} alt="Pouch Logo" />
                 </div>
+                <h1>The General Store</h1>
             </div>
         </header>
     )

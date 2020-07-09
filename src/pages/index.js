@@ -4,7 +4,7 @@ import './styles.scss';
 
 function Homepage(props) {
     return (
-        <section>
+        <section className="homepage">
             <Directory />
         </section>
     );
