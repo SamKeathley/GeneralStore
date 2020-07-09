@@ -1,9 +1,15 @@
 import React from 'react';
+import Header from './components/Header/Header';
+import Homepage from './pages';
+import "./default.scss";
 
 function App() {
   return (
     <div className="App">
-      Hello, Traveler.
+      <Header />
+      <div className="main">
+        <Homepage />
+      </div>
     </div>
   );
 }
