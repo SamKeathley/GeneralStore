@@ -23,7 +23,6 @@
                 margin: 0;
             }
         }
-        
         h1 {
             position: relative;
             top: 45%;
@@ -33,5 +32,32 @@
             font-family: 'Cinzel', serif;
             font-weight: 700;
         }
+
+        .callToActions {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            -webkit-transform: translateY(-30%);
+            -moz-transform: translateY(-30%);
+            transform: translateY(-30%);
+
+            ul, li {
+                margin: 0;
+                padding: 0;
+            }
+
+            li {
+                list-style-type: none;
+
+                a {
+                    font-size: 1.8rem;
+                    line-height: 1;
+                    color: #000000;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        
     }
 }
