@@ -3,6 +3,7 @@ import './styles.scss';
 import { auth, handleUserProfile } from './../../firebase/utils';
 import FormInput from './../Forms/FormInput';
 import Button from './../Forms/Button';
+import AuthWrapper from './../AuthWrapper';
 
 function SignUp() {
     const [displayName, setDisplayName] = useState('');
@@ -37,63 +38,62 @@ function SignUp() {
         }
     }
 
+    const configAuthWrapper = {
+        headline: 'Register'
+    };
+
     return (
-        <div className="signup">
-            <div className="wrap">
-                <h2>
-                    Signup
-                </h2>
-                <div className="formWrap" >
+        <AuthWrapper {...configAuthWrapper}>
+            <div className="formWrap" >
 
-                    {errors.length > 0 && (
-                        <ul>
-                            {errors.map((err, index) => {
-                                return (
-                                    <li key={index}>
-                                        {err}
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    )}
-                    <form onSubmit={handleFormSubmit}>
-                        <FormInput
-                            type="text"
-                            name="displayName"
-                            value={displayName}
-                            placeholder="Full Name"
-                            handleChange={e => setDisplayName(e.target.value)}
-                        />
-                        <FormInput
-                            type="email"
-                            name="email"
-                            value={email}
-                            placeholder="Email Address"
-                            handleChange={e => setEmail(e.target.value)}
-                        />
-                        <FormInput
-                            type="password"
-                            name="password"
-                            value={password}
-                            placeholder="Password"
-                            handleChange={e => setPassword(e.target.value)}
-                        />
+                {errors.length > 0 && (
+                    <ul>
+                        {errors.map((err, index) => {
+                            return (
+                                <li key={index}>
+                                    {err}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                )}
+                <form onSubmit={handleFormSubmit}>
+                    <FormInput
+                        type="text"
+                        name="displayName"
+                        value={displayName}
+                        placeholder="Full Name"
+                        handleChange={e => setDisplayName(e.target.value)}
+                    />
+                    <FormInput
+                        type="email"
+                        name="email"
+                        value={email}
+                        placeholder="Email Address"
+                        handleChange={e => setEmail(e.target.value)}
+                    />
+                    <FormInput
+                        type="password"
+                        name="password"
+                        value={password}
+                        placeholder="Password"
+                        handleChange={e => setPassword(e.target.value)}
+                    />
 
-                        <FormInput
-                            type="password"
-                            name="confirmPassword"
-                            value={confirmPassword}
-                            placeholder="Confirm Password"
-                            handleChange={e => setConfirmPassword(e.target.value)}
-                        />
+                    <FormInput
+                        type="password"
+                        name="confirmPassword"
+                        value={confirmPassword}
+                        placeholder="Confirm Password"
+                        handleChange={e => setConfirmPassword(e.target.value)}
+                    />
 
-                        <Button type="submit">
-                            Register
+                    <Button type="submit">
+                        Register
                     </Button>
-                    </form>
-                </div>
+                </form>
             </div>
-        </div>
+        </AuthWrapper>
     );
 }
 

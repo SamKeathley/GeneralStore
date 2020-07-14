@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './styles.scss';
 import Button from './../Forms/Button';
 import FormInput from './../Forms/FormInput';
-import { signInWithGoogle } from './../../firebase/utils';
+import AuthWrapper from './../AuthWrapper';
+import { signInWithGoogle, auth } from './../../firebase/utils';
 
 function SignIn(props) {
     const [userSignIn, setUserSignIn] = useState({
@@ -22,50 +24,54 @@ function SignIn(props) {
         });
     }
 
-    function handleSubmit(e) {
+    const handleSubmit = async (e) => {
         e.preventDefault();
     }
 
+    const configAuthWrapper = {
+        headline: 'Login'
+    };
+
     return (
-        <div className="signin">
-            <div className="wrap">
-                <h2>
-                    LogIn
-                </h2>
-                <div className="formWrap">
-                    <form onSubmit={handleSubmit}>
+        <AuthWrapper {...configAuthWrapper}>
+            <div className="formWrap">
+                <form onSubmit={handleSubmit}>
 
-                        <FormInput
-                            type="email"
-                            name="email"
-                            value={userSignIn.email}
-                            placeholder="Email"
-                            onChange={handleChange}
-                        />
+                    <FormInput
+                        type="email"
+                        name="email"
+                        value={userSignIn.email}
+                        placeholder="Email"
+                        onChange={handleChange}
+                    />
 
-                        <FormInput
-                            type="password"
-                            name="password"
-                            value={userSignIn.password}
-                            placeholder="Password"
-                            onChange={handleChange}
-                        />
+                    <FormInput
+                        type="password"
+                        name="password"
+                        value={userSignIn.password}
+                        placeholder="Password"
+                        onChange={handleChange}
+                    />
 
-                        <Button type="submit">
-                            LogIn
+                    <Button type="submit">
+                        LogIn
                         </Button>
 
-                        <div className="socialSignin">
-                            <div className="row">
-                                <Button onClick={signInWithGoogle}>
-                                    Sign In with Google
+                    <div className="socialSignin">
+                        <div className="row">
+                            <Button onClick={signInWithGoogle}>
+                                Sign In with Google
                                 </Button>
-                            </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div className="links">
+                        <Link to="/recovery">
+                            Reset Password
+                        </Link>
+                    </div>
+                </form>
             </div>
-        </div>
+        </AuthWrapper>
     )
 }
 
