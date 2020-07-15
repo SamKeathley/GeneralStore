@@ -7,25 +7,24 @@ import AuthWrapper from './../AuthWrapper';
 import { signInWithGoogle, auth } from './../../firebase/utils';
 
 function SignIn(props) {
-    const [userSignIn, setUserSignIn] = useState({
-        email: '',
-        password: ''
-    });
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-
-    function handleChange(e) {
-        const { name, value } = e.target;
-        e.preventDefault();
-        setUserSignIn(prevValue => {
-            return {
-                ...prevValue,
-                [name]: value
-            };
-        });
+    function resetForm() {
+        setEmail('');
+        setPassword('');
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            resetForm();
+
+        } catch (err) {
+            //console.log(err);
+        }
     }
 
     const configAuthWrapper = {
@@ -40,17 +39,17 @@ function SignIn(props) {
                     <FormInput
                         type="email"
                         name="email"
-                        value={userSignIn.email}
+                        value={email}
                         placeholder="Email"
-                        onChange={handleChange}
+                        handleChange={e => setEmail(e.target.value)}
                     />
 
                     <FormInput
                         type="password"
                         name="password"
-                        value={userSignIn.password}
+                        value={password}
                         placeholder="Password"
-                        onChange={handleChange}
+                        handleChange={e => setPassword(e.target.value)}
                     />
 
                     <Button type="submit">

@@ -8,37 +8,23 @@ import Button from './../Forms/Button';
 import { auth } from './../../firebase/utils';
 
 function EmailPassword(props) {
-    const [userEmail, setUserEmail] = useState({
-        email: ''
-    });
+    const [userEmail, setUserEmail] = useState('');
     const [error, setError] = useState([]);
-
-    function handleChange(e) {
-        const { name, value } = e.target;
-        e.preventDefault();
-        setUserEmail(prevValue => {
-            return {
-                ...prevValue,
-                [name]: value
-            };
-        });
-
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(false);
+
         try {
             const config = {
                 url: 'http://localhost:3000/login'
             };
             await auth.sendPasswordResetEmail(userEmail, config)
                 .then(() => {
-                    props.onSubmit(userEmail).history.push('/login')
+                    props.history.push('/login')
                 })
                 .catch(() => {
                     const err = ['Email not found.'];
-                    setError(true);
+                    setError([]);
                 })
         }
         catch (err) {
@@ -71,7 +57,7 @@ function EmailPassword(props) {
                         name="email"
                         value={userEmail.email}
                         placeholder="Email"
-                        onChange={handleChange}
+                        handleChange={e => setUserEmail(e.target.value)}
                     />
                     <Button type="submit">
                         Email Password

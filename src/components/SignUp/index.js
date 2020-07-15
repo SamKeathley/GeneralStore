@@ -5,7 +5,7 @@ import FormInput from './../Forms/FormInput';
 import Button from './../Forms/Button';
 import AuthWrapper from './../AuthWrapper';
 
-function SignUp() {
+function SignUp(props) {
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,14 +20,13 @@ function SignUp() {
         setErrors([]);
     }
 
-    const handleFormSubmit = async event => {
+    const handleSubmit = async event => {
         event.preventDefault();
         if (password !== confirmPassword) {
             const err = ['Passwords Do Not Match!'];
             setErrors(err)
             return;
         }
-
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
 
@@ -57,7 +56,7 @@ function SignUp() {
                         })}
                     </ul>
                 )}
-                <form onSubmit={handleFormSubmit}>
+                <form onSubmit={handleSubmit}>
                     <FormInput
                         type="text"
                         name="displayName"
