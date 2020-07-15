@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { signInWithGoogle } from './../../firebase/utils';
-import { signInUser } from './../../redux/User/user.actions';
+import { signInUser, signInWithGoogle, resetAllAuthForms } from './../../redux/User/user.actions';
 import './styles.scss';
 import Button from './../Forms/Button';
 import FormInput from './../Forms/FormInput';
@@ -21,6 +20,7 @@ function SignIn(props) {
     useEffect(() => {
         if (signInSuccess) {
             resetForm();
+            dispatch(resetAllAuthForms());
             props.history.push('/');
         }
     }, [signInSuccess]);
@@ -28,12 +28,16 @@ function SignIn(props) {
     function resetForm() {
         setEmail('');
         setPassword('');
-    }
+    };
 
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(signInUser({ email, password }));
-    }
+    };
+
+    function handleGoogleSignIn() {
+        dispatch(signInWithGoogle());
+    };
 
     const configAuthWrapper = {
         headline: 'Login'
@@ -66,7 +70,7 @@ function SignIn(props) {
 
                     <div className="socialSignin">
                         <div className="row">
-                            <Button onClick={signInWithGoogle}>
+                            <Button onClick={handleGoogleSignIn}>
                                 Sign In with Google
                                 </Button>
                         </div>
