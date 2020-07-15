@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './styles.scss';
 import Button from './../Forms/Button';
 import FormInput from './../Forms/FormInput';
@@ -21,6 +21,7 @@ function SignIn(props) {
         try {
             await auth.signInWithEmailAndPassword(email, password);
             resetForm();
+            props.history.push('/');
 
         } catch (err) {
             //console.log(err);
@@ -74,4 +75,4 @@ function SignIn(props) {
     )
 }
 
-export default SignIn;
+export default withRouter(SignIn);
