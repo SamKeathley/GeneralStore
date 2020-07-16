@@ -44,7 +44,9 @@ export const resetUserState = () => ({
     type: userTypes.RESET_USER_STATE
 });
 
-
+export const googleSignInStart = () => ({
+    type: userTypes.GOOGLE_SIGN_IN_START
+});
 
 
 export const setCurrentUser = user => ({
@@ -67,17 +69,6 @@ export const resetPassword = ({ userEmail }) => async dispatch => {
 };
 
 export const signInWithGoogle = () => async dispatch => {
-    try {
-        await auth.signInWithPopup(GoogleProvider)
-            .then(() => {
-                dispatch({
-                    type: userTypes.SIGN_IN_SUCCESS,
-                    payload: true
-                });
-            });
-    } catch (err) {
-        // console.log(err);
-    }
 };
 
 export const checkUserSession = () => ({
