@@ -1,8 +1,8 @@
 import { takeLatest, call, all, put } from 'redux-saga/effects';
 import { auth, handleUserProfile, getCurrentUser } from './../../firebase/utils';
 import userTypes from './user.types';
-import { signInSuccess, signOutUserSuccess, userError } from './user.actions';
-
+import { signInSuccess, signOutUserSuccess, resetPasswordSuccess, userError } from './user.actions';
+import { handleResetPasswordAPI } from './user.helpers';
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
     try {
@@ -89,10 +89,31 @@ export function* onSignUpUserStart() {
     yield takeLatest(userTypes.SIGN_UP_USER__START, signUpUser);
 }
 
+export function* resetPassword({ payload: { userEmail } }) {
+    try {
+        yield call(handleResetPasswordAPI, userEmail);
+        yield put(
+            resetPasswordSuccess()
+        );
+    }
+    catch (err) {
+        yield put(
+            userError(err)
+        );
+    }
+
+}
+
+export function* onResetPasswordStart() {
+    yield takeLatest(userTypes.RESET_PASSWORD_START, resetPassword)
+}
+
 export default function* userSagas() {
     yield all([
         call(onEmailSignInStart),
         call(onCheckUserSession),
         call(onSignOutUserStart),
-        call(onSignUpUserStart)]);
+        call(onSignUpUserStart),
+        call(onResetPasswordStart)
+    ]);
 }
