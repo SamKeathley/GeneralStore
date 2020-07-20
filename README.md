@@ -10,3 +10,7 @@ This is my first mock E-Commerce site, D&D themed because I'm a big ol' nerd. I'
 - Redux
 - Firebase
 - GraphQL
+
+### Resources
+---
+- [SimpleTut](https://www.youtube.com/watch?v=7gQay39krqY)
